@@ -1,0 +1,41 @@
+/* DoctorSlotGrid.css */
+
+.slot-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    margin: 1px;
+}
+
+.bg-out {
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.bg-available {
+    background-color: green;
+}
+
+.bg-busy {
+    background-color: #dc3545;
+}
+
+.bg-notify {
+    background-color: #007bff;
+    color: white;
+}
+
+.slot-box {
+    transition: transform 0.1s ease;
+}
+
+.slot-box:hover {
+    transform: scale(1.1);
+    border: 1px solid #333;
+}
