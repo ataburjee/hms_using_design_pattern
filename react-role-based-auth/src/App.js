@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import DoctorAvailabilityPage from "./pages/DoctorAvailabilityPage";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NavbarReplica from "./components/NavbarReplica";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Navbar />
+          <NavbarReplica />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

@@ -75,7 +75,7 @@ const DoctorAvailabilityPage = () => {
     return (
         <div className="container-fluid mt-4 d-flex justify-content-center">
             <div style={{ width: "95%", maxWidth: "1600px" }}>
-                <h5 className="text-center mb-2 fw-bold">Select Date:</h5>
+                {/* <h5 className="text-center mb-2 fw-bold">Select Date:</h5> */}
                 <div className="mb-3 text-center d-flex justify-content-center align-items-center gap-2 flex-wrap">
                     <button
                         className="btn btn-outline-primary btn-sm"
