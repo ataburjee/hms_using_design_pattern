@@ -17,7 +17,7 @@ const Login = () => {
     setErrorMsg("");
     const res = await login(email, password);
     console.log("res = ", res);
-    if (res.user) navigate("/dashboard");
+    if (res.user) navigate("/doctor-availability");
     else {
       setErrorMsg("Server error. Please try again later.");
     }
