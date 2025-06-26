@@ -84,4 +84,11 @@ public class PatientServiceImpl implements PatientService {
     public void deletePatient(String id) {
         patientRepository.deleteById(id);
     }
+
+    @Override
+    public List<Patient> searchPatients(String q) {
+        List<Patient> searchedPatients = patientRepository.findByFullNameContainingIgnoreCaseOrContactNumberContaining(q, q);
+        System.out.println("searchedPatients = " + searchedPatients);
+        return searchedPatients;
+    }
 }

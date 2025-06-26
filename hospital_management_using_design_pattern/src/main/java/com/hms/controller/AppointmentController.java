@@ -16,7 +16,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @PostMapping("/book")
-    public ResponseEntity<AppointmentDTO> book(@RequestBody BookAppointmentRequestDTO request) {
+    public ResponseEntity<AppointmentDTO> bookAppointment(@RequestBody BookAppointmentRequestDTO request) {
         return ResponseEntity.ok(appointmentService.bookAppointment(request));
     }
 }

@@ -1,6 +1,7 @@
 package com.hms.controller;
 
 import com.hms.dto.PatientDTO;
+import com.hms.model.Patient;
 import com.hms.service.PatientService;
 
 import jakarta.validation.Valid;
@@ -20,6 +21,11 @@ public class PatientController {
     @PostMapping
     public ResponseEntity<PatientDTO> create(@Valid @RequestBody PatientDTO dto) {
         return ResponseEntity.ok(patientService.createPatient(dto));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Patient>> searchPatients(@RequestParam("q") String q) {
+        return ResponseEntity.ok(patientService.searchPatients(q));
     }
 
     @GetMapping("/{id}")

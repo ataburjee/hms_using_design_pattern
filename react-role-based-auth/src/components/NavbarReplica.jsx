@@ -22,7 +22,7 @@ const NavbarReplica = () => {
                 <FaCog /> <span>Settings</span>
             </div>
 
-            <div className="d-flex px-3 py-2 align-items-center gap-4 text-secondary border-top" style={{ fontSize: "0.9rem", fontWeight: "500" }}>
+            <div className="d-flex px-3 py-2 align-items-center gap-4 text-primary border-top" style={{ fontSize: "0.9rem", fontWeight: "500" }}>
                 <FaCalendarAlt /> <span>Calendar</span>
                 <FaList /> <span>List</span>
                 <FaClock /> <span>Waiting Room</span>

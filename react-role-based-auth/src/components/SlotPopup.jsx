@@ -4,11 +4,13 @@ import { CheckCircle, X, PlusCircle, Pencil, Trash2, Search, UserPlus } from "lu
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/SlotPopup.css";
 import axios from "axios";
+import PatientSearchInput from "./PatientSearchInput";
 
 const SlotPopup = ({ slot, doctor, onClose, onDelete }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         patientId: "",
+        patientName: "",
         patientNumber: "",
         visitType: "Consultation",
         slotCount: 1,
@@ -23,8 +25,8 @@ const SlotPopup = ({ slot, doctor, onClose, onDelete }) => {
     };
 
     const validate = () => {
-        if (!formData.patientId.trim()) {
-            toast.error("Patient id is required");
+        if (!formData.patientId) {
+            toast.error("Please select a patient from the list.");
             return false;
         }
         if (!/^[0-9]{10}$/.test(formData.patientNumber)) {
@@ -42,13 +44,14 @@ const SlotPopup = ({ slot, doctor, onClose, onDelete }) => {
         if (!validate()) return;
 
         const appointmentPayload = {
-            patientId: formData.patientId,
+            patientName: formData.patientId,
             doctorId: doctor?.doctorId,
             timeSlotId: slot?.id,
             isOnline: false
         };
 
         try {
+            console.log("appointmentPayload = ", appointmentPayload);
             const res = await axios.post("http://localhost:8080/api/appointments/book", appointmentPayload);
             console.log("Appointment booked:", res.data);
 
@@ -80,7 +83,17 @@ const SlotPopup = ({ slot, doctor, onClose, onDelete }) => {
                                     </select>
                                 </div>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" />
+                                    <PatientSearchInput
+                                        onSelectPatient=
+                                        {(patient) => {
+                                            setFormData(prev => ({
+                                                ...prev,
+                                                patientId: patient.id,
+                                                patientName: patient.fullName,
+                                                patientNumber: patient.contactNumber
+                                            }))
+                                        }}
+                                    />
                                 </div>
                                 <div className="col-sm-3 d-flex gap-2">
                                     <button className="btn btn-outline-primary"><Search size={16} /></button>
@@ -92,7 +105,7 @@ const SlotPopup = ({ slot, doctor, onClose, onDelete }) => {
                             <div className="row mt-3 g-2">
                                 <label className="col-sm-2 col-form-label fw-semibold">New Patient</label>
                                 <div className="col-sm-5">
-                                    <input type="text" className="form-control" name="patientId" placeholder="patientId" value={formData.patientId} onChange={handleChange} />
+                                    <input type="text" className="form-control" name="patientName" placeholder="Patient Name" value={formData.patientName} onChange={handleChange} />
                                 </div>
                                 <div className="col-sm-5">
                                     <input type="text" className="form-control" name="patientNumber" placeholder="Mobile Number" value={formData.patientNumber} onChange={handleChange} />
