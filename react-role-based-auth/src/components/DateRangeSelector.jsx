@@ -4,6 +4,9 @@ import { format } from "date-fns";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 const DateRangeSelector = ({ doctorId, onCreate, onClose }) => {
     const durations = [15, 30, 60];
@@ -19,6 +22,23 @@ const DateRangeSelector = ({ doctorId, onCreate, onClose }) => {
     const [endTime, setEndTime] = useState("13:00");
     const [slotDuration, setSlotDuration] = useState(15);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [disabledDates, setDisabledDates] = useState([]);
+
+    useEffect(() => {
+        const fetchUnavailableDates = async () => {
+            try {
+                const res = await axios.get(`http://localhost:8080/api/slots/unavailable-dates?doctorId=${doctorId}`);
+                const unavailable = res.data.map(dateStr => new Date(dateStr));
+                console.log("unavailable = ", unavailable)
+                setDisabledDates(unavailable);
+            } catch (err) {
+                console.error("Error fetching unavailable dates:", err);
+            }
+        };
+
+        fetchUnavailableDates();
+    }, [doctorId]);
+
 
     const handleCreateClick = () => {
         const { startDate, endDate } = state[0];
@@ -27,7 +47,6 @@ const DateRangeSelector = ({ doctorId, onCreate, onClose }) => {
             alert("Please fill in all fields.");
             return;
         }
-
         onCreate({
             doctorId,
             startDate,
@@ -37,6 +56,7 @@ const DateRangeSelector = ({ doctorId, onCreate, onClose }) => {
             slotDuration,
         });
     };
+
 
     return (
         <div
@@ -70,6 +90,7 @@ const DateRangeSelector = ({ doctorId, onCreate, onClose }) => {
                                 ranges={state}
                                 months={1}
                                 direction="vertical"
+                                disabledDates={disabledDates}
                             />
                         </div>
                     </div>

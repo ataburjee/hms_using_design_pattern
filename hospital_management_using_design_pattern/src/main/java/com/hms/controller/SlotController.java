@@ -26,15 +26,12 @@ public class SlotController {
         return ResponseEntity.ok(slotService.createSlots(request));
     }
 
-//    @PutMapping()
-//    public ResponseEntity<List<TimeSlot>> updateSlot(@RequestBody SlotUpdateRequestDTO request) {
-//        return ResponseEntity.ok(slotService.updateSlot(request));
-//    }
+    @GetMapping("/unavailable-dates")
+    public ResponseEntity<List<LocalDate>> getUnavailableDates(@RequestParam String doctorId) {
+        List<LocalDate> dates = slotService.getUnavailableDates(doctorId);
+        return ResponseEntity.ok(dates);
+    }
 
-//    @GetMapping()
-//    public ResponseEntity<List<TimeSlot>> getSlots(@RequestBody SlotCreationRequestDTO request) {
-//        return ResponseEntity.ok(slotService.listSlots(request));
-//    }
 
     @GetMapping
     public ResponseEntity<List<AvailableDoctorTimeSlotDTO>> listDoctorHavingSlotsByDate(

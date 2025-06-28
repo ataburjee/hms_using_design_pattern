@@ -28,6 +28,13 @@ public class SlotServiceImpl implements SlotService {
     private final SlotStrategyFactory slotStrategyFactory;
 
     @Override
+    public List<LocalDate> getUnavailableDates(String doctorId) {
+        LocalDate from = LocalDate.now();
+        LocalDate to = from.plusMonths(3);
+        return slotRepository.findDistinctDatesByDoctorIdBetween(doctorId, from, to);
+    }
+
+    @Override
     public List<TimeSlot> createSlots(SlotCreationRequestDTO request) {
         Doctor doctor = doctorRepository
                 .findById(request.getDoctorId())
@@ -45,7 +52,7 @@ public class SlotServiceImpl implements SlotService {
 
     @Override
     public List<AvailableDoctorTimeSlotDTO> listDoctorHavingSlotsByDate(LocalDate date) {
-        List<TimeSlot> timeSlotsByDate = slotRepository.findByDate(date);
+        List<TimeSlot> timeSlotsByDate = slotRepository.findByDateOrderByStartTime(date);
         if (timeSlotsByDate.isEmpty()) {
             return Collections.emptyList();
         }
@@ -60,8 +67,10 @@ public class SlotServiceImpl implements SlotService {
                             .doctorName(doctor.getName())
                             .doctorType(doctor.getDoctorType())
                             .department(doctor.getDepartment())
-                            .timeSlots(timeSlotList).build());
+                            .timeSlots(timeSlotList)
+                            .build());
                 });
         return list;
     }
+
 }

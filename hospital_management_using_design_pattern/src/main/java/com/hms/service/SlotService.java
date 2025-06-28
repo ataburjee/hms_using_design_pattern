@@ -12,4 +12,5 @@ public interface SlotService {
     List<TimeSlot> createSlots(SlotCreationRequestDTO request);
     List<TimeSlot> getSlotsForDoctor(String doctorId, LocalDate date);
     List<AvailableDoctorTimeSlotDTO> listDoctorHavingSlotsByDate(LocalDate date);
+    List<LocalDate> getUnavailableDates(String doctorId);
 }

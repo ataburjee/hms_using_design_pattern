@@ -62,9 +62,13 @@ const DoctorSlotGrid = ({ doctors }) => {
         }
     };
 
-    const toISODate = (dateObj) => {
-        return new Date(dateObj).toISOString().split("T")[0];
+    const formatDateOnly = (dateObj) => {
+        const yyyy = dateObj.getFullYear();
+        const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const dd = String(dateObj.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
     };
+
 
     // Create Slots
     const handleCreateSlots = async ({
@@ -75,14 +79,14 @@ const DoctorSlotGrid = ({ doctors }) => {
         endTime,
         slotDuration
     }) => {
-        console.log("Create slot request = ", doctorId, startDate, endDate, startTime, endTime, slotDuration);
+        console.log("Create slot request = ", doctorId, formatDateOnly(startDate), formatDateOnly(endDate), startTime, endTime, slotDuration);
         try {
             setIsCreatingSlots(true);
             const res = await axios.post(`http://localhost:8080/api/slots`, {
                 slotType: "DAILY",
                 doctorId,
-                startDate: toISODate(startDate),
-                endDate: toISODate(endDate),
+                startDate: formatDateOnly(startDate),
+                endDate: formatDateOnly(endDate),
                 startTime,
                 endTime,
                 slotDuration
@@ -214,7 +218,7 @@ const DoctorSlotGrid = ({ doctors }) => {
             {showDateRangePopup && (
                 <DateRangeSelector
                     // doctorId={selectedDoctor?.doctorId || doctors[0].doctorId}
-                    doctorId={"HMS-DOC7ce38fd0-dd85-42e1-b33e-0cba817b2d6c"}
+                    doctorId={"HMS-DOC30e3a02d-2ce0-402a-b1fa-82e1ebe8a596"}
                     onCreate={handleCreateSlots}
                     onClose={() => setShowDateRangePopup(false)}
                 />

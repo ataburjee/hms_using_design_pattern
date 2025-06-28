@@ -113,7 +113,6 @@ const DoctorAvailabilityPage = () => {
                             Next Day ➡️
                         </button>
                     </div>
-
                     <DoctorSlotGrid doctors={doctors} />
                 </div>
             </div>
