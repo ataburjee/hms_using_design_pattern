@@ -1,4 +1,4 @@
-package com.hms.service.opd.impl;
+package com.hms.service.impl;
 
 import com.hms.dto.AppointmentDTO;
 import com.hms.dto.BookAppointmentRequestDTO;
@@ -8,7 +8,7 @@ import com.hms.repository.opd.AppointmentRepository;
 import com.hms.enums.opd.SlotStatus;
 import com.hms.model.TimeSlot;
 import com.hms.repository.opd.TimeSlotRepository;
-import com.hms.service.opd.AppointmentService;
+import com.hms.service.AppointmentService;
 
 import com.hms.util.Utility;
 import lombok.RequiredArgsConstructor;

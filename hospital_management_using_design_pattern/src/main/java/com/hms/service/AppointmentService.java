@@ -1,4 +1,4 @@
-package com.hms.service.opd;
+package com.hms.service;
 
 import com.hms.dto.AppointmentDTO;
 import com.hms.dto.BookAppointmentRequestDTO;

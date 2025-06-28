@@ -1,6 +1,7 @@
 package com.hms.service;
 
 import com.hms.dto.AvailableDoctorTimeSlotDTO;
+import com.hms.dto.RecurringSlotRequestDTO;
 import com.hms.dto.SlotCreationRequestDTO;
 import com.hms.model.TimeSlot;
 

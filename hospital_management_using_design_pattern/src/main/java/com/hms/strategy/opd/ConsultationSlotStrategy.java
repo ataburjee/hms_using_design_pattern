@@ -20,7 +20,7 @@ public class ConsultationSlotStrategy implements SlotCreationStrategy {
     public List<TimeSlot> generateSlots(SlotCreationRequestDTO request, Doctor doctor) {
         List<TimeSlot> slots = new ArrayList<>();
 
-        Duration duration = request.getSlotDuration();
+        Duration duration = Duration.ofMinutes(request.getSlotDuration());
         LocalTime startTime = request.getStartTime();
         LocalTime endTime = request.getEndTime();
 

@@ -9,6 +9,7 @@ import DoctorAvailabilityPage from "./pages/DoctorAvailabilityPage";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavbarReplica from "./components/NavbarReplica";
+import DateRangeSelector from "./components/DateRangeSelector";
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
       <AuthProvider>
         <Router>
           <Navbar />
-          <NavbarReplica />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/doctor-availability" element={<DoctorAvailabilityPage />}></Route>
+            <Route path="/doctor-availability" element={<DoctorAvailabilityPage />} />
+            {/* <Route path="/date-range" element={<DateRangeSelector />} /> */}
           </Routes>
         </Router>
       </AuthProvider>

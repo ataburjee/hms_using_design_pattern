@@ -1,8 +1,8 @@
 package com.hms.controller;
 
 import com.hms.dto.AvailableDoctorTimeSlotDTO;
+import com.hms.dto.RecurringSlotRequestDTO;
 import com.hms.dto.SlotCreationRequestDTO;
-import com.hms.dto.SlotUpdateRequestDTO;
 import com.hms.model.TimeSlot;
 import com.hms.service.SlotService;
 
@@ -35,11 +35,6 @@ public class SlotController {
 //    public ResponseEntity<List<TimeSlot>> getSlots(@RequestBody SlotCreationRequestDTO request) {
 //        return ResponseEntity.ok(slotService.listSlots(request));
 //    }
-
-    @PostMapping("/book")
-    public ResponseEntity<List<TimeSlot>> bookSlot(@RequestBody SlotCreationRequestDTO request) {
-        return ResponseEntity.ok(slotService.createSlots(request));
-    }
 
     @GetMapping
     public ResponseEntity<List<AvailableDoctorTimeSlotDTO>> listDoctorHavingSlotsByDate(

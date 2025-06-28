@@ -4,6 +4,7 @@ import com.hms.dto.SlotCreationRequestDTO;
 import com.hms.enums.opd.SlotStatus;
 import com.hms.model.Doctor;
 import com.hms.model.TimeSlot;
+import com.hms.util.Utility;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -19,7 +20,7 @@ public class SurgerySlotStrategy implements SlotCreationStrategy {
     public List<TimeSlot> generateSlots(SlotCreationRequestDTO request, Doctor doctor) {
         List<TimeSlot> slots = new ArrayList<>();
 
-        Duration duration = request.getSlotDuration();
+        Duration duration = Duration.ofMinutes(request.getSlotDuration());
         LocalTime startTime = request.getStartTime();
         LocalTime endTime = request.getEndTime();
 
@@ -53,6 +54,7 @@ public class SurgerySlotStrategy implements SlotCreationStrategy {
 
         while (!current.plus(duration).isAfter(end)) {
             slots.add(TimeSlot.builder()
+                    .id(Utility.generateId(Utility.TIME_SLOT))
                     .doctorId(doctorId)
                     .date(date)
                     .startTime(current)
@@ -60,11 +62,8 @@ public class SurgerySlotStrategy implements SlotCreationStrategy {
                     .status(SlotStatus.AVAILABLE)
                     .isBooked(false)
                     .build());
-
-            // surgeries are not back-to-back: add 30 mins break
-            current = current.plus(duration).plusMinutes(30);
+            current = current.plus(duration);
         }
-
         return slots;
     }
 }

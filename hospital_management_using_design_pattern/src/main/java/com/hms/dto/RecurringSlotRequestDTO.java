@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RecurringSlotRequest {
+public class RecurringSlotRequestDTO {
 
     private String doctorId;
     private LocalDate startDate;
@@ -20,11 +20,11 @@ public class RecurringSlotRequest {
     private LocalTime startTime;
     private LocalTime endTime;
     private Integer slotDurationInMinutes;
-    private List<DayOfWeek> repeatOn;
-    private SlotType slotType;
-    private String tag;
-    private String note;
-    private String colorCode;
+//    private List<DayOfWeek> repeatOn;
+//    private SlotType slotType;
+//    private String tag;
+//    private String note;
+//    private String colorCode;
 
 }
 

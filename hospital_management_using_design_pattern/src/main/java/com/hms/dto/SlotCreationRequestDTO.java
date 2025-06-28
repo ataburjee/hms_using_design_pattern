@@ -36,8 +36,8 @@ public class SlotCreationRequestDTO {
     private LocalTime endTime;
 
     @NotNull
-    private Duration slotDuration;
+    private Long slotDuration;
 
-    private List<DayOfWeek> daysOfWeek;     // for weekly
-    private List<LocalDate> customDates;    // for custom
+    private List<DayOfWeek> daysOfWeek;
+    private List<LocalDate> customDates;
 }
